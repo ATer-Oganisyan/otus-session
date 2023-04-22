@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otus-crud-server-deployment
+  labels:
+    app: simple-http-crud-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simple-http-crud-server
+  template:
+    metadata:
+      labels:
+        app: simple-http-crud-server
+    spec:
+      containers:
+      - name: simple-http-crud-server
+        image: arsenteroganisyan/otus-crud-server:v1
+        ports:
+        - containerPort: 8000
+        env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: port
+          - name: HOST
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: host
+          - name: USER
+            valueFrom:
+              secretKeyRef:
+                name: secret
+                key: user
+          - name: DB
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: db
+          - name: PASSWRORD
+            valueFrom:
+              secretKeyRef:
+                name: secret
+                key: password
