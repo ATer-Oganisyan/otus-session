@@ -9,4 +9,4 @@ WORKDIR /www
 RUN apk update
 RUN apk add openjdk11
 RUN apk add git && git clone https://github.com/ATer-Oganisyan/otus-session.git && cd otus-session && javac SessionServer.java && apk del git && rm SessionServer.java
-ENTRYPOINT java -classpath /www/otus-session SessionServer.java $HOST $PORT $USER $PASSWRORD $DB v1
+ENTRYPOINT java -classpath /www/otus-session SessionServer.java $HOST v1

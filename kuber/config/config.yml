@@ -3,6 +3,4 @@ kind: ConfigMap
 metadata:
   name: config
 data:
-  host: "myzql-release-mysql.default.svc.cluster.local"
-  port: "3306"
-  db: "crud"
+  host: "otus-crud-server-service.default.svc.cluster.local"

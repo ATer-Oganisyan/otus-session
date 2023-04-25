@@ -27,6 +27,7 @@ public class SessionServer {
     private static Map<String, Map<String, String>> sessions = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
+        System.out.println("SessionServer version: " + args[1]);
         host = args[0];
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
         server.createContext("/", new MyHandler());
@@ -115,10 +116,10 @@ public class SessionServer {
         try {
             response = client.send(request, BodyHandlers.ofString());
         } catch (IOException e) {
-            System.out.println("IOException");
+            System.out.println("getUserInfo IOException: " + e.getMessage());
             throw new RuntimeException();
         } catch (InterruptedException e) {
-            System.out.println("IOException");
+            System.out.println("getUserInfo InterruptedException: " + e.getMessage());
             throw new RuntimeException();
         }
 
