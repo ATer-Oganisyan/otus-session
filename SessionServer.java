@@ -157,9 +157,9 @@ public class SessionServer {
         String id = responseMap.get("id");
         System.out.println("String id = responseMap.get");
         String pwdEncrypted = responseMap.get("pwd_crypted");
-        System.out.println("String pwdEncrypted = responseMap.get);
+        System.out.println("String pwdEncrypted = responseMap.get");
         if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || "".equals(pwdEncrypted)) {
-            System.out.println("if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || );
+            System.out.println("if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || ");
             return null;
         }
         System.out.println("String token = getMd5(pwdEncrypted);");
