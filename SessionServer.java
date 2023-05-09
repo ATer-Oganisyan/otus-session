@@ -112,13 +112,21 @@ public class SessionServer {
         String body = "login:" + login;
         System.out.println("HttpRequest request = HttpRequest.newBuilder()");
         HttpRequest request;
+        System.out.println("HttpRequest request;");
         try {
-            request = HttpRequest.newBuilder()
-                    .uri(URI.create(host + "/get-by-login"))
-                    .timeout(Duration.ofMinutes(1))
-                    .header("Content-Type", "plain/text")
-                    .POST(HttpRequest.BodyPublishers.ofString(body))
-                    .build();
+            System.out.println("try");
+            HttpRequest.Builder builder = HttpRequest.newBuilder();
+            System.out.println("HttpRequest.Builder builder = HttpRequest.newBuilder();");
+            builder.uri(URI.create(host + "/get-by-login"));
+            System.out.println("builder.uri");
+            builder.timeout(Duration.ofMinutes(1));
+            System.out.println("builder.timeout");
+            builder.header("Content-Type", "plain/text");
+            System.out.println("builder.header");
+            builder.POST(HttpRequest.BodyPublishers.ofString(body));
+            System.out.println("builder.POST");
+            request = builder.build();
+            System.out.println("builder.build()");
         } catch (Error e) {
             System.out.println(e.getMessage());
             System.out.println(e.toString());
