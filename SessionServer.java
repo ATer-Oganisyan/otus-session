@@ -110,6 +110,9 @@ public class SessionServer {
     }
 
     static private Map<String, String> getUserInfo(String login, String pwd) {
+        System.out.println("getUserInfo");
+        System.out.println("login = " + login);
+        System.out.println("pwd = " + pwd);
         String body = "login:" + login;
         System.out.println("HttpRequest request = HttpRequest.newBuilder()");
         HttpRequest request;
@@ -158,7 +161,7 @@ public class SessionServer {
         System.out.println("String id = responseMap.get");
         String pwdEncrypted = responseMap.get("pwd_crypted");
         System.out.println("pwdEncrypted = " + pwdEncrypted);
-        if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || "".equals(pwdEncrypted)) {
+        if (pwd == null || pwdEncrypted == null || "".equals(pwdEncrypted) || getMd5(pwd) != pwdEncrypted) {
             System.out.println("if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || ");
             return null;
         }
