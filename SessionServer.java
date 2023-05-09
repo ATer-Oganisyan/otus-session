@@ -112,7 +112,7 @@ public class SessionServer {
         String body = "login:" + login;
         System.out.println("HttpRequest request = HttpRequest.newBuilder()");
         HttpRequest request;
-        System.out.println("HttpRequest request;");
+        System.out.println("HttpRequest request");
         try {
             System.out.println("try");
             HttpRequest.Builder builder = HttpRequest.newBuilder();
