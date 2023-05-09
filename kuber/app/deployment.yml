@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: otus-session-server
-        image: arsenteroganisyan/otus-session-server:v10
+        image: arsenteroganisyan/otus-session-server:v11
         ports:
         - containerPort: 8000
         env:

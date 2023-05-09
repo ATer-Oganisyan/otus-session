@@ -274,7 +274,8 @@ public class SessionServer {
         for (String part: parts) {
             String[] keyVal = part.split(":");
             System.out.println("keyVal");
-            if (keyVal.length > 2) {
+            if (keyVal.length > 1) {
+                System.out.println("keyVals -  " + keyVal[0] + ":" + keyVal[1]);
                 result.put(keyVal[0], keyVal[1]);
             }
         }
