@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: config
 data:
-  host: "otus-crud-server-service.default.svc.cluster.local"
+  crud_server_host: "otus-crud-server-service.default.svc.cluster.local:8080"

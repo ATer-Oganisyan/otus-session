@@ -155,13 +155,17 @@ public class SessionServer {
         System.out.println("responsBody = " + responsBody);
         Map<String, String> responseMap = postToMap(new StringBuilder(responsBody));
         String id = responseMap.get("id");
+        System.out.println("String id = responseMap.get");
         String pwdEncrypted = responseMap.get("pwd_crypted");
+        System.out.println("String pwdEncrypted = responseMap.get);
         if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || "".equals(pwdEncrypted)) {
+            System.out.println("if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || );
             return null;
         }
         System.out.println("String token = getMd5(pwdEncrypted);");
         String token = getMd5(pwdEncrypted);
         HashMap<String, String> userInfo = new HashMap<>();
+        System.out.println("token = " + token);
         userInfo.put("id", id);
         userInfo.put("token", token);
         return userInfo;
@@ -251,10 +255,14 @@ public class SessionServer {
                 .replaceAll(" ", "")
                 .replaceAll(";", "\n")
                 .split("\n");
+        System.out.println("parts: " + parts.toString());
         Map<String, String> result = new HashMap<>();
         for (String part: parts) {
             String[] keyVal = part.split(":");
-            result.put(keyVal[0], keyVal[1]);
+            System.out.println("keyVal");
+            if (keyVal.length > 2) {
+                result.put(keyVal[0], keyVal[1]);
+            }
         }
         System.out.println("postToMap buf: " + result.toString());
         return result;

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: otus-session-server
-        image: arsenteroganisyan/otus-session-server:v6
+        image: arsenteroganisyan/otus-session-server:v7
         ports:
         - containerPort: 8000
         env:
@@ -24,4 +24,4 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: config
-                key: host
+                key: crud_server_host
