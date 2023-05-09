@@ -16,12 +16,12 @@ spec:
     spec:
       containers:
       - name: otus-session-server
-        image: arsenteroganisyan/otus-session-server:v2
+        image: arsenteroganisyan/otus-session-server:v3
         ports:
         - containerPort: 8000
         env:
-          - name: PORT
+          - name: HOST
             valueFrom:
               configMapKeyRef:
                 name: config
-                key: port
+                key: host

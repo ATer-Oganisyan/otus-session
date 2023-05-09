@@ -29,6 +29,7 @@ public class SessionServer {
     public static void main(String[] args) throws Exception {
         System.out.println("SessionServer version: " + args[1]);
         host = args[0];
+        System.out.println("SessionServer version: " + host);
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
         server.createContext("/", new MyHandler());
         server.setExecutor(null); // creates a default executor
@@ -85,9 +86,12 @@ public class SessionServer {
      */
     static private void routeAuth(HttpExchange t) throws IOException {
         System.out.println("Route routeAuth");
+        System.out.println("Route postToMap");
         Map<String, String> request = postToMap(buf(t.getRequestBody()));
+        System.out.println("Route getUserInfo");
         Map<String, String> userInfo = getUserInfo(request.get("login"), request.get("pwd"));
         if (userInfo == null) {
+            System.out.println("userInfo == null");
             String r = "wrong credentials";
             OutputStream os = t.getResponseBody();
             t.sendResponseHeaders(403, r.length());
@@ -106,14 +110,17 @@ public class SessionServer {
 
     static private Map<String, String> getUserInfo(String login, String pwd) {
         String body = "login:" + login;
+        System.out.println("HttpRequest request = HttpRequest.newBuilder()");
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(host + "/get-by-login"))
                 .timeout(Duration.ofMinutes(1))
                 .header("Content-Type", "plain/text")
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();
+
         HttpResponse<String> response;
         try {
+            System.out.println("response = client.send(request, BodyHandlers.ofString());");
             response = client.send(request, BodyHandlers.ofString());
         } catch (IOException e) {
             System.out.println("getUserInfo IOException: " + e.getMessage());
@@ -127,12 +134,15 @@ public class SessionServer {
             return null;
         }
         String responsBody = response.body();
+        System.out.println("Map<String, String> responseMap = postToMap(new StringBuilder(responsBody));");
+        System.out.println("responsBody = " + responsBody);
         Map<String, String> responseMap = postToMap(new StringBuilder(responsBody));
         String id = responseMap.get("id");
         String pwdEncrypted = responseMap.get("pwd_crypted");
         if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || "".equals(pwdEncrypted)) {
             return null;
         }
+        System.out.println("String token = getMd5(pwdEncrypted);");
         String token = getMd5(pwdEncrypted);
         HashMap<String, String> userInfo = new HashMap<>();
         userInfo.put("id", id);
@@ -229,7 +239,7 @@ public class SessionServer {
             String[] keyVal = part.split(":");
             result.put(keyVal[0], keyVal[1]);
         }
-        System.out.println("buf: " + result.toString());
+        System.out.println("postToMap buf: " + result.toString());
         return result;
     }
 
