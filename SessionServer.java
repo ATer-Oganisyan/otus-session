@@ -86,9 +86,9 @@ public class SessionServer {
      */
     static private void routeAuth(HttpExchange t) throws IOException {
         System.out.println("Route routeAuth");
-        System.out.println("Route postToMap");
+        System.out.println("postToMap");
         Map<String, String> request = postToMap(buf(t.getRequestBody()));
-        System.out.println("Route getUserInfo");
+        System.out.println("getUserInfo");
         Map<String, String> userInfo = getUserInfo(request.get("login"), request.get("pwd"));
         if (userInfo == null) {
             System.out.println("userInfo == null");
@@ -111,12 +111,19 @@ public class SessionServer {
     static private Map<String, String> getUserInfo(String login, String pwd) {
         String body = "login:" + login;
         System.out.println("HttpRequest request = HttpRequest.newBuilder()");
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(host + "/get-by-login"))
-                .timeout(Duration.ofMinutes(1))
-                .header("Content-Type", "plain/text")
-                .POST(HttpRequest.BodyPublishers.ofString(body))
-                .build();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(host + "/get-by-login"))
+                    .timeout(Duration.ofMinutes(1))
+                    .header("Content-Type", "plain/text")
+                    .POST(HttpRequest.BodyPublishers.ofString(body))
+                    .build();
+        } catch (Error e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.toString());
+            throw e;
+        }
+
 
         HttpResponse<String> response;
         try {
