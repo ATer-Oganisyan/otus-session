@@ -157,7 +157,7 @@ public class SessionServer {
         String id = responseMap.get("id");
         System.out.println("String id = responseMap.get");
         String pwdEncrypted = responseMap.get("pwd_crypted");
-        System.out.println("String pwdEncrypted = responseMap.get");
+        System.out.println("pwdEncrypted = " + pwdEncrypted);
         if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || "".equals(pwdEncrypted)) {
             System.out.println("if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || ");
             return null;
@@ -177,11 +177,12 @@ public class SessionServer {
 
     private static String getMd5(String input) {
         try {
+            System.out.println("getMd5 input = " + input);
             System.out.println("MessageDigest md = MessageDigest.getInstance");
             MessageDigest md = MessageDigest.getInstance("MD5");
             System.out.println("byte[] messageDigest = md.digest(input.getBytes());");
             byte[] messageDigest = md.digest(input.getBytes());
-            System.out.println("byte[] messageDigest = md.digest(input.getBytes());");
+            System.out.println("messageDigest = " + messageDigest);
             BigInteger no = new BigInteger(1, messageDigest);
             System.out.println("BigInteger no = new BigInteger(1, messageDigest);");
             String hashtext = no.toString(16);
