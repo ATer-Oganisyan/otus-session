@@ -163,6 +163,10 @@ public class SessionServer {
             return null;
         }
         System.out.println("String token = getMd5(pwdEncrypted);");
+        if (pwdEncrypted == null) {
+            System.out.println("pwdEncrypted = null");
+            return null;
+        }
         String token = getMd5(pwdEncrypted);
         HashMap<String, String> userInfo = new HashMap<>();
         System.out.println("token = " + token);
@@ -173,13 +177,19 @@ public class SessionServer {
 
     private static String getMd5(String input) {
         try {
+            System.out.println("MessageDigest md = MessageDigest.getInstance");
             MessageDigest md = MessageDigest.getInstance("MD5");
+            System.out.println("byte[] messageDigest = md.digest(input.getBytes());");
             byte[] messageDigest = md.digest(input.getBytes());
+            System.out.println("byte[] messageDigest = md.digest(input.getBytes());");
             BigInteger no = new BigInteger(1, messageDigest);
+            System.out.println("BigInteger no = new BigInteger(1, messageDigest);");
             String hashtext = no.toString(16);
+            System.out.println("String hashtext = no.toString(16);");
             while (hashtext.length() < 32) {
                 hashtext = "0" + hashtext;
             }
+            System.out.println("hashtext = " + hashtext);
             return hashtext;
         }
         catch (NoSuchAlgorithmException e) {
