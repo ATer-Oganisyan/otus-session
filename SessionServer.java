@@ -111,8 +111,9 @@ public class SessionServer {
     static private Map<String, String> getUserInfo(String login, String pwd) {
         String body = "login:" + login;
         System.out.println("HttpRequest request = HttpRequest.newBuilder()");
+        HttpRequest request;
         try {
-            HttpRequest request = HttpRequest.newBuilder()
+            request = HttpRequest.newBuilder()
                     .uri(URI.create(host + "/get-by-login"))
                     .timeout(Duration.ofMinutes(1))
                     .header("Content-Type", "plain/text")
