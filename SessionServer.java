@@ -22,14 +22,15 @@ import java.time.Duration;
 public class SessionServer {
 
     private static HttpClient client = HttpClient.newBuilder().build();
+    private static String scheme = "http://";
     private static String host = "";
 
     private static Map<String, Map<String, String>> sessions = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
-        System.out.println("SessionServer version: " + args[1]);
         host = args[0];
-        System.out.println("SessionServer version: " + host);
+        System.out.println("SessionServer version: " + args[1]);
+        System.out.println("SessionServer host: " + host);
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
         server.createContext("/", new MyHandler());
         server.setExecutor(null); // creates a default executor
@@ -117,7 +118,7 @@ public class SessionServer {
             System.out.println("try");
             HttpRequest.Builder builder = HttpRequest.newBuilder();
             System.out.println("HttpRequest.Builder builder = HttpRequest.newBuilder();");
-            builder.uri(URI.create(host + "/get-by-login"));
+            builder.uri(URI.create(scheme + host + "/get-by-login"));
             System.out.println("builder.uri");
             builder.timeout(Duration.ofMinutes(1));
             System.out.println("builder.timeout");

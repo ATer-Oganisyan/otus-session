@@ -14,4 +14,4 @@ Enjoy :)
 
 
 # To build container run: 
-docker build -t arsenteroganisyan/otus-session-server:v5 /Users/arsen/otus-session --no-cache --platform linux/amd64
+docker build -t arsenteroganisyan/otus-session-server:v6 /Users/arsen/otus-session --no-cache --platform linux/amd64
