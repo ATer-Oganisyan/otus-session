@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.util.*;
 
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -238,6 +239,16 @@ public class SessionServer {
      */
     static private void routeUnauth(HttpExchange t) throws IOException {
         System.out.println("Route routeUnauth");
+        Headers headers = t.getResponseHeaders();
+        System.out.println("headers = " + headers);
+        List<String> headersList;
+        if (headers == null) {
+            headersList = new ArrayList<>();
+        } else {
+            headersList = headers.get("Cookie");
+        }
+        System.out.println("headersList = " + headersList);
+        if (headersList == null) headersList = new ArrayList<>();
         String cookieString = String.join(";", t.getResponseHeaders().get("Cookie"));
         System.out.println("String cookieString = String.join");
         if (cookieString == null) cookieString = "";
