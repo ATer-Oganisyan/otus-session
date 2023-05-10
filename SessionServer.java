@@ -121,14 +121,15 @@ public class SessionServer {
             System.out.println("try");
             HttpRequest.Builder builder = HttpRequest.newBuilder();
             System.out.println("HttpRequest.Builder builder = HttpRequest.newBuilder();");
-            builder.uri(URI.create(scheme + host + "/get-by-login"));
+            builder.uri(URI.create(scheme + host + "/get-by-login?login=" + login));
             System.out.println("builder.uri");
             builder.timeout(Duration.ofMinutes(1));
             System.out.println("builder.timeout");
             builder.header("Content-Type", "plain/text");
             System.out.println("builder.header");
-            builder.POST(HttpRequest.BodyPublishers.ofString(body));
+            builder.GET();
             System.out.println("builder.POST");
+            builder
             request = builder.build();
             System.out.println("builder.build()");
         } catch (Error e) {
