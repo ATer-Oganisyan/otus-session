@@ -129,7 +129,6 @@ public class SessionServer {
             System.out.println("builder.header");
             builder.GET();
             System.out.println("builder.POST");
-            builder
             request = builder.build();
             System.out.println("builder.build()");
         } catch (Error e) {
