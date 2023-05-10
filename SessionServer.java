@@ -249,8 +249,8 @@ public class SessionServer {
         }
         System.out.println("headersList = " + headersList);
         if (headersList == null) headersList = new ArrayList<>();
-        String cookieString = String.join(";", t.getResponseHeaders().get("Cookie"));
-        System.out.println("String cookieString = String.join");
+        String cookieString = String.join(";", headersList);
+        System.out.println("cookieString = " + cookieString);
         if (cookieString == null) cookieString = "";
         Map<String, String> cookie = postToMap(new StringBuilder(cookieString));
         System.out.println(" Map<String, String> cookie = postToMap");
