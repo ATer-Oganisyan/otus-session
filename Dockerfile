@@ -11,4 +11,4 @@ RUN apk add openjdk11
 RUN apk add git 
 RUN git clone https://github.com/ATer-Oganisyan/otus-session.git
 RUN cd otus-session && javac SessionServer.java
-ENTRYPOINT java -classpath /www/otus-session SessionServer $HOST v14
+ENTRYPOINT java -classpath /www/otus-session SessionServer $HOST v16

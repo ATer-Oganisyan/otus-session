@@ -103,7 +103,7 @@ public class SessionServer {
         String r = "role:user";
         sessions.put(userInfo.get("token"), userInfo);
         OutputStream os = t.getResponseBody();
-        t.getResponseHeaders().add("cookie", "token=" + userInfo.get("token"));
+        t.getResponseHeaders().add("Cookie", "token=" + userInfo.get("token"));
         t.sendResponseHeaders(200, r.length());
         os.write(r.getBytes());
         os.close();
@@ -238,9 +238,13 @@ public class SessionServer {
      */
     static private void routeUnauth(HttpExchange t) throws IOException {
         System.out.println("Route routeUnauth");
-        String cookieString = String.join(";", t.getResponseHeaders().get("cookie"));
+        String cookieString = String.join(";", t.getResponseHeaders().get("Cookie"));
+        System.out.println("String cookieString = String.join");
+        if (cookieString == null) cookieString = "";
         Map<String, String> cookie = postToMap(new StringBuilder(cookieString));
+        System.out.println(" Map<String, String> cookie = postToMap");
         String token = cookie.get("token");
+        System.out.println("token = " + token);
         sessions.remove(token);
         String r = "";
         OutputStream os = t.getResponseBody();
