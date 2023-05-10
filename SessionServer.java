@@ -169,7 +169,7 @@ public class SessionServer {
             return null;
         }
         System.out.println("pwdEncrypted == getMd5(pwd) " + (pwdEncrypted.equals(md5Pwd)));
-        if (pwd == null || "".equals(pwdEncrypted) || pwdEncrypted.equals(md5Pwd)) {
+        if (pwd == null || "".equals(pwdEncrypted) || !pwdEncrypted.equals(md5Pwd)) {
             System.out.println("if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || ");
             return null;
         }
