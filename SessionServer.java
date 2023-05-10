@@ -161,15 +161,19 @@ public class SessionServer {
         System.out.println("String id = responseMap.get");
         String pwdEncrypted = responseMap.get("pwd_crypted");
         System.out.println("pwdEncrypted = " + pwdEncrypted);
-        if (pwd == null || pwdEncrypted == null || "".equals(pwdEncrypted) || getMd5(pwd) != pwdEncrypted) {
+        String md5Pwd = getMd5(pwd);
+        System.out.println("pwd == " + pwd);
+        System.out.println("pwd == " + pwd);
+        if (pwdEncrypted == null) {
+            System.out.println("pwdEncrypted = null - return");
+            return null;
+        }
+        System.out.println("pwdEncrypted == getMd5(pwd) " + (pwdEncrypted.equals(md5Pwd)));
+        if (pwd == null || "".equals(pwdEncrypted) || pwdEncrypted.equals(md5Pwd)) {
             System.out.println("if (getMd5(pwd) != pwdEncrypted || pwdEncrypted == null || ");
             return null;
         }
         System.out.println("String token = getMd5(pwdEncrypted);");
-        if (pwdEncrypted == null) {
-            System.out.println("pwdEncrypted = null");
-            return null;
-        }
         String token = getMd5(pwdEncrypted);
         HashMap<String, String> userInfo = new HashMap<>();
         System.out.println("token = " + token);
