@@ -241,6 +241,7 @@ public class SessionServer {
         System.out.println("Route routeUnauth");
         Headers headers = t.getResponseHeaders();
         System.out.println("headers = " + headers);
+        printLogs(headers.values());
         List<String> headersList;
         if (headers == null) {
             headersList = new ArrayList<>();
@@ -262,6 +263,14 @@ public class SessionServer {
         t.sendResponseHeaders(200, r.length());
         os.write(r.getBytes());
         os.close();
+    }
+
+    private void printLogs(Collection<List<String>> headers) {
+        for (List<String> headerList : headers) {
+            for (String header : headers) {
+                System.out.println(header);
+            }
+        }
     }
 
     static private Map<String, String> queryToMap(String query) {
