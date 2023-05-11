@@ -239,7 +239,7 @@ public class SessionServer {
      */
     static private void routeUnauth(HttpExchange t) throws IOException {
         System.out.println("Route routeUnauth");
-        Headers headers = t.getResponseHeaders();
+        Headers headers = t.getRequestHeaders();
         System.out.println("headers = " + headers);
         printLogs(headers.values());
         List<String> headersList;
@@ -266,6 +266,7 @@ public class SessionServer {
     }
 
     static private void printLogs(Collection<List<String>> headers) {
+        System.out.println("printLogs");
         for (List<String> headerList : headers) {
             for (String header : headerList) {
                 System.out.println(header);
