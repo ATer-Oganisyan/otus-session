@@ -265,9 +265,9 @@ public class SessionServer {
         os.close();
     }
 
-    private void printLogs(Collection<List<String>> headers) {
+    static private void printLogs(Collection<List<String>> headers) {
         for (List<String> headerList : headers) {
-            for (String header : headers) {
+            for (String header : headerList) {
                 System.out.println(header);
             }
         }
