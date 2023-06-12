@@ -159,6 +159,7 @@ public class SessionServer {
         System.out.println("responsBody = " + responsBody);
         Map<String, String> responseMap = postToMap(new StringBuilder(responsBody));
         String id = responseMap.get("id");
+        String role = responseMap.get("role");
         System.out.println("String id = responseMap.get");
         String pwdEncrypted = responseMap.get("pwd_crypted");
         System.out.println("pwdEncrypted = " + pwdEncrypted);
