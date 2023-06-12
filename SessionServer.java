@@ -181,6 +181,7 @@ public class SessionServer {
         System.out.println("token = " + token);
         userInfo.put("id", id);
         userInfo.put("token", token);
+        userInfo.put("role", role);
         return userInfo;
     }
 
@@ -226,7 +227,7 @@ public class SessionServer {
             os.close();
             return;
         }
-        String r = "id:" + userInfo.get("id") + "\nrole:user";
+        String r = "id:" + userInfo.get("id") + "\nrole:" + userInfo.get("role");
         OutputStream os = t.getResponseBody();
         t.sendResponseHeaders(200, r.length());
         os.write(r.getBytes());
