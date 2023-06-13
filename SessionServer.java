@@ -176,7 +176,7 @@ public class SessionServer {
             return null;
         }
         System.out.println("String token = getMd5(pwdEncrypted);");
-        String token = getMd5(pwdEncrypted);
+        String token = getMd5(login + pwdEncrypted);
         HashMap<String, String> userInfo = new HashMap<>();
         System.out.println("token = " + token);
         userInfo.put("id", id);
