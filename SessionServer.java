@@ -101,7 +101,7 @@ public class SessionServer {
             os.close();
             return;
         }
-        String r = "role:user";
+        String r = "role:" + userInfo.get("role");
         sessions.put(userInfo.get("token"), userInfo);
         OutputStream os = t.getResponseBody();
         t.getResponseHeaders().add("Cookie", "token=" + userInfo.get("token"));
